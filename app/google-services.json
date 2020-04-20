@@ -1,0 +1,48 @@
+{
+  "project_info": {
+    "project_number": "1019433431812",
+    "firebase_url": "https://meduza-v01.firebaseio.com",
+    "project_id": "meduza-v01",
+    "storage_bucket": "meduza-v01.appspot.com"
+  },
+  "client": [
+    {
+      "client_info": {
+        "mobilesdk_app_id": "1:1019433431812:android:d9681c14befb2dad7ad651",
+        "android_client_info": {
+          "package_name": "com.meduza.application"
+        }
+      },
+      "oauth_client": [
+        {
+          "client_id": "1019433431812-v53532adm5k1lol2ishq99uh8td2dquo.apps.googleusercontent.com",
+          "client_type": 1,
+          "android_info": {
+            "package_name": "com.meduza.application",
+            "certificate_hash": "9d4b2dff68de548cda072f9e0acbc62d72563161"
+          }
+        },
+        {
+          "client_id": "1019433431812-3s4ag37fq0dspaddr2ct6ecc25f9uk6a.apps.googleusercontent.com",
+          "client_type": 3
+        }
+      ],
+      "api_key": [
+        {
+          "current_key": "AIzaSyBMwgNgATFy9ocSNo-VbEETLHuPzcyWY6o"
+        }
+      ],
+      "services": {
+        "appinvite_service": {
+          "other_platform_oauth_client": [
+            {
+              "client_id": "1019433431812-3s4ag37fq0dspaddr2ct6ecc25f9uk6a.apps.googleusercontent.com",
+              "client_type": 3
+            }
+          ]
+        }
+      }
+    }
+  ],
+  "configuration_version": "1"
+}

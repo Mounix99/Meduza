@@ -1,0 +1,20 @@
+<resources>
+    <string name="app_name">Meduza</string>
+    <string name="Meduza_string">MEDUZA</string>
+    <string name="Meduza_string_after">Use gentle</string>
+    <string name="Meduza_string_bottom">Login or use a register button</string>
+    <string name="SignIn_btn">Sign in</string>
+    <string name="Register_btn">Registration</string>
+    <string name="title_activity_home">Home</string>
+    <string name="title_home">Home</string>
+    <string name="title_dashboard">Dashboard</string>
+    <string name="title_notifications">Notifications</string>
+    <string name="Desk">DESK</string>
+    <string name="Friends">FRIENDS</string>
+    <string name="Profile">PROFILE</string>
+    <string name="Dialogs">DIALOG</string>
+
+    <string name="dialog_tab_title">Choose dialog or chat</string>
+    <string name="access_title">Is it private element?</string>
+
+</resources>

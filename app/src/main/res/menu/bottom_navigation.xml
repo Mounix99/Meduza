@@ -1,0 +1,25 @@
+<?xml version="1.0" encoding="utf-8"?>
+<menu xmlns:tools="http://schemas.android.com/tools"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    xmlns:android="http://schemas.android.com/apk/res/android">
+    <item
+        android:id="@+id/desk_tab"
+        android:title="@string/Desk"
+        android:icon="@drawable/ic_storage_black_24dp"
+        android:visible="true"/>
+    <item
+        android:id="@+id/friend_desk_tab"
+        android:title="@string/Friends"
+        android:icon="@drawable/ic_search_black_24dp"
+        android:visible="true"/>
+    <item
+        android:id="@+id/profile_tab"
+        android:title="@string/Profile"
+        android:icon="@drawable/ic_account_circle_black_24dp"
+        android:visible="true"/>
+    <item
+        android:id="@+id/dialogs_tab"
+        android:title="@string/Dialogs"
+        android:icon="@drawable/ic_message_black_24dp"
+        android:visible="true" />
+</menu>
