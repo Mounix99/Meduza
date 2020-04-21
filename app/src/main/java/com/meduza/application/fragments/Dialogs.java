@@ -1,7 +1,6 @@
 package com.meduza.application.fragments;
 
 import android.annotation.SuppressLint;
-import android.app.Dialog;
 import android.content.DialogInterface;
 import android.os.Bundle;
 import android.text.TextUtils;
@@ -30,6 +29,7 @@ import com.google.firebase.firestore.FirebaseFirestore;
 import com.google.firebase.firestore.Query;
 import com.meduza.application.R;
 import com.meduza.application.adapters.DialogAdapter;
+import com.meduza.application.models.Dialog;
 import com.meduza.application.models.Message;
 
 import java.util.Objects;
@@ -38,12 +38,12 @@ import java.util.Objects;
 public class Dialogs extends Fragment {
 
     private FirebaseFirestore db = FirebaseFirestore.getInstance();
-    private CollectionReference messageRef = db.collection("MessageCollection");
+    private CollectionReference messageRef = db.collection("DialogCollection");
 
     private DialogAdapter adapter;
     private View dialogView;
 
-    private String Addressee;
+
 
     @Nullable
     @Override
@@ -65,10 +65,11 @@ public class Dialogs extends Fragment {
 
     private void setUpDialogRecyclerView() {
         Query query = messageRef
-                .whereEqualTo("userName", Objects.requireNonNull(FirebaseAuth.getInstance().getCurrentUser()).getEmail());
+                //.whereEqualTo("users", Objects.requireNonNull(FirebaseAuth.getInstance().getCurrentUser()).getEmail())
+                ;
 
-        FirestoreRecyclerOptions<Message> options = new FirestoreRecyclerOptions.Builder<Message>()
-                .setQuery(query, Message.class)
+        FirestoreRecyclerOptions<Dialog> options = new FirestoreRecyclerOptions.Builder<Dialog>()
+                .setQuery(query, Dialog.class)
                 .build();
 
         adapter = new DialogAdapter(options);
@@ -80,11 +81,7 @@ public class Dialogs extends Fragment {
         adapter.setOnItemClickListener(new DialogAdapter.OnItemClickListener() {
             @Override
             public void onItemClick(DocumentSnapshot documentSnapshot, int position) {
-                Addressee = (String) documentSnapshot.get("userAddressee");
                 Fragment newFragment = new Mess();
-                final Bundle bundle = new Bundle();
-                bundle.putString("Addressee", Addressee);
-                newFragment.setArguments(bundle);
                 FragmentTransaction transaction = requireFragmentManager().beginTransaction();
                 transaction.replace(R.id.fragment_container, newFragment);
                 transaction.commit();

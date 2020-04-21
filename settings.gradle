@@ -1,0 +1,2 @@
+rootProject.name='Meduza'
+include ':app'

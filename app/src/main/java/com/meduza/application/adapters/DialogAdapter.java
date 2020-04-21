@@ -10,41 +10,44 @@ import androidx.recyclerview.widget.RecyclerView;
 
 import com.firebase.ui.firestore.FirestoreRecyclerAdapter;
 import com.firebase.ui.firestore.FirestoreRecyclerOptions;
+import com.google.firebase.database.GenericTypeIndicator;
 import com.google.firebase.firestore.DocumentSnapshot;
 import com.meduza.application.R;
-import com.meduza.application.models.Message;
+import com.meduza.application.models.Dialog;
 
-public class DialogAdapter extends FirestoreRecyclerAdapter <Message, DialogAdapter.MessageHolder> {
+public class DialogAdapter extends FirestoreRecyclerAdapter <Dialog, DialogAdapter.DialogHolder> {
     private OnItemClickListener listenerDialog;
 
-    public DialogAdapter(@NonNull FirestoreRecyclerOptions<Message> options) {
+    public DialogAdapter(@NonNull FirestoreRecyclerOptions<Dialog> options) {
         super(options);
     }
 
 
+
     @NonNull
     @Override
-    public MessageHolder onCreateViewHolder(@NonNull ViewGroup parent, int viewType) {
+    public DialogHolder onCreateViewHolder(@NonNull ViewGroup parent, int viewType) {
         View v = LayoutInflater.from(parent.getContext()).inflate(R.layout.list_dialog,
                 parent,  false);
 
-        return new MessageHolder(v);
+        return new DialogHolder(v);
     }
 
     @Override
-    protected void onBindViewHolder(@NonNull MessageHolder messageHolder, int i, @NonNull Message message) {
-        messageHolder.user_addressee.setText(message.getUserAddressee());
+    public void onBindViewHolder(@NonNull DialogHolder dialogHolder, int i, @NonNull Dialog dialog) {
+        GenericTypeIndicator text = dialog.getUsers();
+        dialogHolder.users.setText(text.toString());
 
     }
 
-    class MessageHolder extends RecyclerView.ViewHolder {
+    class DialogHolder extends RecyclerView.ViewHolder {
 
-        TextView user_addressee;
+        TextView users;
 
-        MessageHolder(@NonNull View itemView) {
+        DialogHolder(@NonNull View itemView) {
             super(itemView);
 
-            user_addressee = itemView.findViewById(R.id.user_addressee);
+            users = itemView.findViewById(R.id.user_addressee);
 
             itemView.setOnClickListener(new View.OnClickListener() {
                 @Override
