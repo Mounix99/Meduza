@@ -1,9 +1,5 @@
 package com.meduza.application.models;
 
-import com.google.firebase.Timestamp;
-
-import java.util.Date;
-
 
 public class Message {
     private String userName;
@@ -12,23 +8,14 @@ public class Message {
    // private String messageTime;
 
     public Message() {}
-    public Message(String userName,  String userAddressee, String textMessage ) {
+    public Message(String userName,String textMessage ) {
         this.userName = userName;
-        this.userAddressee = userAddressee;
         this.textMessage = textMessage;
         //long date = new Date().getTime();
         //this.messageTime = ;
 
     }
 
-
-    public String getUserAddressee() {
-        return userAddressee;
-    }
-
-    public void setUserAddressee(String userAddressee) {
-        this.userAddressee = userAddressee;
-    }
 
     public String getUserName() {
         return userName;

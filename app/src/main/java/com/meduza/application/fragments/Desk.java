@@ -78,7 +78,7 @@ public class Desk extends Fragment {
         dialogAdd.setMessage("Fill the fields");
 
         LayoutInflater inflater = LayoutInflater.from(getActivity());
-        @SuppressLint("InflateParams") View new_note_window = inflater.inflate(R.layout.new_note_window, null);
+        @SuppressLint("InflateParams") View new_note_window = inflater.inflate(R.layout.window_new_note, null);
         dialogAdd.setView(new_note_window);
 
         add_layout = rootView.findViewById(R.id.add_layout);

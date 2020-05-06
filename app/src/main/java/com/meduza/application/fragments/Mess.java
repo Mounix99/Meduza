@@ -28,15 +28,15 @@ import com.meduza.application.models.Message;
 import java.util.Objects;
 
 public class Mess extends Fragment {
-    private FirebaseFirestore db = com.google.firebase.firestore.FirebaseFirestore.getInstance();
-    private CollectionReference messageRef = db.collection("MessageCollection");
+    private FirebaseFirestore db = FirebaseFirestore.getInstance();
+
 
     private View messView;
 
     private MessAdapter adapterMess;
     private FloatingActionButton sendBtn;
 
-    private String Addressee;
+    private String dialog;
 
 
     @Nullable
@@ -45,10 +45,22 @@ public class Mess extends Fragment {
         messView= inflater.inflate(R.layout.fragment_mess, container, false);
 
         Bundle args = getArguments();
-        if (args  != null && args.containsKey("Addressee"))
-            Addressee = args.getString("Addressee");
+        if (args  != null && args.containsKey("dialog"))
+            dialog = args.getString("dialog");
 
-        displayAllMessages();
+        final CollectionReference messageRef = db.collection("DialogCollection/"+dialog+"/messages");
+
+
+        FirestoreRecyclerOptions<Message> options = new FirestoreRecyclerOptions.Builder<Message>()
+                .setQuery(messageRef, Message.class)
+                .build();
+
+        adapterMess = new MessAdapter(options);
+
+
+        RecyclerView recyclerView1 = messView.findViewById(R.id.message_recycle_view);
+        recyclerView1.setLayoutManager(new LinearLayoutManager(getContext()));
+        recyclerView1.setAdapter(adapterMess);
 
         final EditText text_field = messView.findViewById(R.id.massage_field);
 
@@ -58,12 +70,11 @@ public class Mess extends Fragment {
             public void onClick(View v) {
                 String textMassage = text_field.getText().toString();
                 String userName = Objects.requireNonNull(FirebaseAuth.getInstance().getCurrentUser()).getEmail();
-                String userAddressee = Addressee;
                 if(text_field.getText().toString().equals("")){
                     return;
                 }
                 else {
-                    messageRef.add(new Message(userName,userAddressee,textMassage))
+                    messageRef.add(new Message(userName,textMassage))
                             .addOnSuccessListener(new OnSuccessListener<DocumentReference>() {
                                 @Override
                                 public void onSuccess(DocumentReference documentReference) {
@@ -80,29 +91,6 @@ public class Mess extends Fragment {
         return messView;
     }
 
-    private void displayAllMessages() {
-
-        Query query = messageRef.whereEqualTo("userName",FirebaseAuth.getInstance().getCurrentUser().getEmail()).whereEqualTo("userAddressee",Addressee);
-        Query query1 = messageRef.whereEqualTo("userName",Addressee).whereEqualTo("userAddressee",FirebaseAuth.getInstance().getCurrentUser().getEmail());
-                //.whereIn("userName", Arrays.asList(Addressee,FirebaseAuth.getInstance().getCurrentUser().getEmail()))
-                //.whereIn("userAddressee",Arrays.asList(FirebaseAuth.getInstance().getCurrentUser().getEmail(),Addressee))
-                //.whereEqualTo("userAddressee",FirebaseAuth.getInstance().getCurrentUser().getEmail())
-                //.whereEqualTo("userName", Addressee
-                //.whereEqualTo("userAddressee",Addressee)
-                ;
-
-        FirestoreRecyclerOptions<Message> options = new FirestoreRecyclerOptions.Builder<Message>()
-                .setQuery(query, Message.class)
-                .setQuery(query1, Message.class)
-                .build();
-
-        adapterMess = new MessAdapter(options);
-
-
-        RecyclerView recyclerView1 = messView.findViewById(R.id.message_recycle_view);
-        recyclerView1.setLayoutManager(new LinearLayoutManager(getContext()));
-        recyclerView1.setAdapter(adapterMess);
-    }
 
     @Override
     public void onStart() {

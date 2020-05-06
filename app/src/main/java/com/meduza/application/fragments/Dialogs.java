@@ -22,8 +22,10 @@ import com.firebase.ui.firestore.FirestoreRecyclerOptions;
 import com.google.android.gms.tasks.OnFailureListener;
 import com.google.android.gms.tasks.OnSuccessListener;
 import com.google.android.material.floatingactionbutton.FloatingActionButton;
+import com.google.android.material.snackbar.Snackbar;
 import com.google.firebase.auth.FirebaseAuth;
 import com.google.firebase.firestore.CollectionReference;
+import com.google.firebase.firestore.DocumentReference;
 import com.google.firebase.firestore.DocumentSnapshot;
 import com.google.firebase.firestore.FirebaseFirestore;
 import com.google.firebase.firestore.Query;
@@ -32,8 +34,8 @@ import com.meduza.application.adapters.DialogAdapter;
 import com.meduza.application.models.Dialog;
 import com.meduza.application.models.Message;
 
+import java.util.ArrayList;
 import java.util.Objects;
-
 
 public class Dialogs extends Fragment {
 
@@ -42,6 +44,8 @@ public class Dialogs extends Fragment {
 
     private DialogAdapter adapter;
     private View dialogView;
+
+    private EditText edit_text_create_dialog;
 
 
 
@@ -54,7 +58,7 @@ public class Dialogs extends Fragment {
         add_dialog_btn.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
-
+                showCreateDialog();
             }
         });
 
@@ -65,7 +69,7 @@ public class Dialogs extends Fragment {
 
     private void setUpDialogRecyclerView() {
         Query query = messageRef
-                //.whereEqualTo("users", Objects.requireNonNull(FirebaseAuth.getInstance().getCurrentUser()).getEmail())
+                .whereArrayContains("users", Objects.requireNonNull(FirebaseAuth.getInstance().getCurrentUser().getEmail()))
                 ;
 
         FirestoreRecyclerOptions<Dialog> options = new FirestoreRecyclerOptions.Builder<Dialog>()
@@ -81,26 +85,59 @@ public class Dialogs extends Fragment {
         adapter.setOnItemClickListener(new DialogAdapter.OnItemClickListener() {
             @Override
             public void onItemClick(DocumentSnapshot documentSnapshot, int position) {
+                String dialog = documentSnapshot.getId();
                 Fragment newFragment = new Mess();
+                final Bundle bundle = new Bundle();
+                bundle.putString("dialog", dialog);
+                newFragment.setArguments(bundle);
                 FragmentTransaction transaction = requireFragmentManager().beginTransaction();
                 transaction.replace(R.id.fragment_container, newFragment);
                 transaction.commit();
+
             }
         });
     }
 
-    /*private void showDialog(){
-        //adapterMess.startListening();
-        @SuppressLint("UseRequireInsteadOfGet")
+    private void showCreateDialog(){
         AlertDialog.Builder dialogDialog;
         dialogDialog = new AlertDialog.Builder(requireActivity());
         dialogDialog.setCancelable(false);
+        dialogDialog.setTitle("Add dialog");
+        dialogDialog.setMessage("Fill the field");
         LayoutInflater inflater = LayoutInflater.from(getActivity());
-        @SuppressLint("InflateParams") View dialog_window = inflater.inflate(R.layout.fragment_mess, null);
+        View dialog_window = inflater.inflate(R.layout.window_create_dialog, null);
         dialogDialog.setView(dialog_window);
 
-        //RelativeLayout activity_massage_start = dialogView.findViewById(R.id.activity_massage_start);
+        edit_text_create_dialog = dialog_window.findViewById(R.id.edit_text_create_dialog);
 
+
+        dialogDialog.setPositiveButton("Create", new DialogInterface.OnClickListener() {
+            @Override
+            public void onClick(DialogInterface dialog, int which) {
+                final String second_user = edit_text_create_dialog.getText().toString();
+
+                if (TextUtils.isEmpty(second_user)) {
+                    Snackbar.make(dialogView, "Enter user Email", Snackbar.LENGTH_SHORT).show();
+                    return;
+                }
+
+                ArrayList<String> users = new ArrayList<>();
+                users.add(FirebaseAuth.getInstance().getCurrentUser().getEmail());
+                users.add(second_user);
+
+                messageRef.add(new Dialog(users))
+                        .addOnSuccessListener(new OnSuccessListener<DocumentReference>() {
+                            @Override
+                            public void onSuccess(DocumentReference documentReference) {
+                            }
+                        })
+                        .addOnFailureListener(new OnFailureListener() {
+                            @Override
+                            public void onFailure(@NonNull Exception e) {
+                            }
+                        });
+            }
+        });
         dialogDialog.setNegativeButton("Cancel", new DialogInterface.OnClickListener() {
             @Override
             public void onClick(DialogInterface dialogInterface, int which) {
@@ -108,7 +145,7 @@ public class Dialogs extends Fragment {
             }
         });
         dialogDialog.show();
-    }*/
+    }
 
 
 

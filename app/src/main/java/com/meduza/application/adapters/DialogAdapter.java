@@ -35,8 +35,7 @@ public class DialogAdapter extends FirestoreRecyclerAdapter <Dialog, DialogAdapt
 
     @Override
     public void onBindViewHolder(@NonNull DialogHolder dialogHolder, int i, @NonNull Dialog dialog) {
-        GenericTypeIndicator text = dialog.getUsers();
-        dialogHolder.users.setText(text.toString());
+        dialogHolder.users.setText(dialog.getUsers().toString());
 
     }
 

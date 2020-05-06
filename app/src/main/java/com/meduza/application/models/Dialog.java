@@ -5,20 +5,20 @@ import com.google.firebase.database.GenericTypeIndicator;
 import java.util.ArrayList;
 
 public class Dialog {
-    private GenericTypeIndicator users;
+    private ArrayList<String> users;
 
     public Dialog() {}
-    public Dialog(GenericTypeIndicator users) {
+    public Dialog(ArrayList<String> users) {
         this.users = users;
 
     }
 
 
-    public GenericTypeIndicator getUsers() {
+    public ArrayList<String> getUsers() {
         return users;
     }
 
-    public void setUsers(GenericTypeIndicator users) {
+    public void setUsers(ArrayList<String> users) {
         this.users = users;
     }
 }

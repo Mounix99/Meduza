@@ -4,7 +4,7 @@
     xmlns:tools="http://schemas.android.com/tools"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
-    android:background="@drawable/bg"
+    android:background="@drawable/meduza"
     tools:context=".MainActivity"
     android:id="@+id/root_element">
 
@@ -12,9 +12,11 @@
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         android:orientation="vertical"
-        android:layout_marginTop="170dp"
         android:gravity="center"
-        android:layout_centerHorizontal="true">
+        android:id="@+id/title_layout"
+        android:layout_centerHorizontal="true"
+        android:layout_above="@+id/button_layout"
+        android:layout_marginBottom="50dp">
 
         <TextView
             android:id="@+id/textView"
@@ -22,8 +24,10 @@
             android:layout_height="wrap_content"
             android:fontFamily="@font/anton"
             android:text="@string/Meduza_string"
-            android:textColor="@android:color/white"
-            android:textSize="35sp" />
+            android:textColor="@color/md_white_1000"
+            android:textSize="35sp"
+            android:paddingLeft="10dp"
+            android:paddingRight="10dp"/>
 
         <TextView
             android:id="@+id/textView2"
@@ -50,28 +54,28 @@
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
         android:weightSum="2"
+        android:id="@+id/button_layout"
         android:layout_above="@+id/twBottom"
         android:layout_margin="20dp"
+        android:layout_below="@+id/text_layout"
         android:layout_centerHorizontal="true">
 
         <Button
             android:id="@+id/btnSignIn"
-            style="@android:style/Widget.Material.Light.Button.Small"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
             android:layout_marginRight="10dp"
             android:layout_weight="1"
-            android:fontFamily="@font/anton"
-            android:text="@string/SignIn_btn" />
+            android:text="@string/SignIn_btn"
+            android:background="@drawable/textview_shape"/>
 
         <Button
             android:id="@+id/btnRegister"
-            style="@android:style/Widget.Material.Light.Button.Small"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
             android:layout_marginLeft="10dp"
             android:layout_weight="1"
-            android:fontFamily="@font/anton"
-            android:text="@string/Register_btn" />
+            android:text="@string/Register_btn"
+            android:background="@drawable/textview_shape"/>
     </LinearLayout>
 </RelativeLayout>

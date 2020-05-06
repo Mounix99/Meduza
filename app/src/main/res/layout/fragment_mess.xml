@@ -5,6 +5,7 @@
     android:layout_width="match_parent"
     android:layout_height="match_parent"
     tools:context="fragments.Dialogs"
+    android:background="@drawable/grad"
     android:id="@+id/activity_massage_start">
 
     <com.google.android.material.floatingactionbutton.FloatingActionButton
@@ -22,14 +23,17 @@
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
         android:id="@+id/text_layout"
+        android:layout_marginBottom="5dp"
         android:layout_alignParentBottom="true"
         android:layout_alignParentStart="true"
         android:layout_toLeftOf="@+id/btnSend">
 
         <EditText
             android:layout_width="match_parent"
-            android:layout_height="wrap_content"
+            android:layout_height="match_parent"
             android:id="@+id/massage_field"
+            android:padding="5dp"
+            android:background="@drawable/textview_shape"
             android:hint="Enter your massage" />
 
     </com.google.android.material.textfield.TextInputLayout>

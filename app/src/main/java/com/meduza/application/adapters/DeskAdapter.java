@@ -28,7 +28,7 @@ public class DeskAdapter extends FirestoreRecyclerAdapter <Note, DeskAdapter.Not
     @NonNull
     @Override
     public NoteHolder onCreateViewHolder(@NonNull ViewGroup parent, int viewType) {
-        View v = LayoutInflater.from(parent.getContext()).inflate(R.layout.add_note,
+        View v = LayoutInflater.from(parent.getContext()).inflate(R.layout.list_note,
                parent,  false);
 
         return new NoteHolder(v);

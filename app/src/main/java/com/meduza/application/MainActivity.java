@@ -15,7 +15,6 @@ import android.widget.RelativeLayout;
 
 import com.google.android.gms.tasks.OnFailureListener;
 import com.google.android.gms.tasks.OnSuccessListener;
-import com.google.android.material.bottomnavigation.BottomNavigationView;
 import com.google.android.material.snackbar.Snackbar;
 import com.google.firebase.auth.AuthResult;
 import com.google.firebase.auth.FirebaseAuth;
@@ -69,7 +68,7 @@ public class MainActivity extends AppCompatActivity {
         dialog1.setMessage("Fill all the fields to get access to your account");
 
         LayoutInflater inflater = LayoutInflater.from(this);
-        View sign_in_window = inflater.inflate(R.layout.signin_window, null);
+        View sign_in_window = inflater.inflate(R.layout.window_signin, null);
         dialog1.setView(sign_in_window);
 
         final MaterialEditText email = sign_in_window.findViewById(R.id.emailFild);
@@ -122,7 +121,7 @@ public class MainActivity extends AppCompatActivity {
         dialog.setMessage("Fill all the fields to create account");
 
         LayoutInflater inflater = LayoutInflater.from(this);
-        View register_window = inflater.inflate(R.layout.register_window, null);
+        View register_window = inflater.inflate(R.layout.window_register, null);
         dialog.setView(register_window);
 
         final MaterialEditText email = register_window.findViewById(R.id.emailFild);

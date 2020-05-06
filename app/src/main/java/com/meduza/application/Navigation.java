@@ -24,7 +24,7 @@ public class Navigation extends AppCompatActivity {
         bottomNav.setOnNavigationItemSelectedListener(navListener);
 
         getSupportFragmentManager().beginTransaction().replace(R.id.fragment_container,
-                new Dialogs()).commit();
+                new Desk()).commit();
 
 
     }
